@@ -11,8 +11,9 @@
     // }
 
     function createButton(value){
-        let button = document.createButton('button');
-        button.classList.add(`btn buttonSet${value}`);
+        let button = createElement('button');
+        button.classList.add(`btn`);
+        button.classList.add(`buttonSet${value}`);
         button.id = `set(${value})`;
 
         button.append(value);
@@ -77,7 +78,7 @@
     }
 
     function createCalculatorApp(){
-        let container = document.querySelector('container');
+        let container = document.querySelector('.container');
 
         let calculator = document.createElement('div');
         calculator.classList.add('calculator');
