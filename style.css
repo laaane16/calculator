@@ -2,17 +2,37 @@
   margin: 0px auto;
   max-width: 1200px;
 }
+
 .calculator {
-  width: 800px;
-  height: 1000px;
+  box-sizing: content-box;
+  width: 365px;
+  padding: 10px 20px;
+  border: 2px solid #f6f6f6;
+  border-radius: 15px;
+}
+.calculator .input {
+  width: 100%;
 }
 .calculator__interface {
   display: flex;
+  flex-wrap: wrap;
 }
 .calculator__interface-item {
-  color: blue;
-  width: 50px;
-  height: 50px;
+  padding: 0px;
+  background-color: white;
+  color: #f8f8f8;
+  border: 0;
+  outline: 1px solid #d1d1d1;
+  color: #1d1d1d;
+  border-radius: 10px;
+  width: 80px;
+  height: 40px;
+}
+.calculator__interface-item:not(:nth-child(4n)) {
+  margin-right: 15px;
+}
+.calculator__interface-item:not(:nth-child(n+16)) {
+  margin-bottom: 15px;
 }
 
 /*# sourceMappingURL=style.css.map */

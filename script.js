@@ -34,7 +34,8 @@
 
         for (let i = 0; i < 10; i++){
 
-            let currentElement = createButton(`${i}`)
+            let currentElement = createButton(`${i}`);
+            currentElement.classList.add('calculator__interface-item');
             interfaceElements.push(currentElement);
         }
 
@@ -43,35 +44,35 @@
         interfaceElements.push(sumButton);
 
         let subtractButton = createButton('-');
-        sumButton.classList.add('calculator__interface-item');
+        subtractButton.classList.add('calculator__interface-item');
         interfaceElements.push(subtractButton);
    
         let multiplicButton = createButton('*');
-        sumButton.classList.add('calculator__interface-item');
+        multiplicButton.classList.add('calculator__interface-item');
         interfaceElements.push(multiplicButton);
 
         let divisionButton = createButton('/');
-        sumButton.classList.add('calculator__interface-item');
+        divisionButton.classList.add('calculator__interface-item');
         interfaceElements.push(divisionButton);
 
         let leftBracketButton = createButton('(');
-        sumButton.classList.add('calculator__interface-item');
+        leftBracketButton.classList.add('calculator__interface-item');
         interfaceElements.push(leftBracketButton);
 
         let rightBracketButton = createButton(')');
-        sumButton.classList.add('calculator__interface-item');
+        rightBracketButton.classList.add('calculator__interface-item');
         interfaceElements.push(rightBracketButton);
 
         let buttonAC = createButton('AC');
-        sumButton.classList.add('calculator__interface-item');
+        buttonAC.classList.add('calculator__interface-item');
         interfaceElements.push(buttonAC);
 
         let equalityButton = createButton('=');
-        sumButton.classList.add('calculator__interface-item');
+        equalityButton.classList.add('calculator__interface-item');
         interfaceElements.push(equalityButton);
 
         let dotButton = createButton('.');
-        sumButton.classList.add('calculator__interface-item');
+        dotButton.classList.add('calculator__interface-item');
         interfaceElements.push(dotButton);
 
         return  interfaceElements;
@@ -82,6 +83,13 @@
 
         let calculator = document.createElement('div');
         calculator.classList.add('calculator');
+
+        let input = createElement('input');
+        input.classList.add('calculator__interface-item');
+        input.classList.add('input')
+        input.id = 'input';
+
+        calculator.append(input)
 
         let calculatorInterface = createCalculatorInterface();
 
