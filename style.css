@@ -12,6 +12,7 @@
 }
 .calculator .input {
   width: 100%;
+  text-align: end;
 }
 .calculator__interface {
   display: flex;

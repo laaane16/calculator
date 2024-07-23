@@ -35,40 +35,45 @@
                     document.querySelector('.input').value += element.id.slice(4,5);
                 }
             } else{
-                document.querySelector('.input').value += element.id.slice(4,5);
+                if (document.querySelector('.input').value == '0'){
+                    document.querySelector('.input').value = element.id.slice(4,5);
+                }else{
+                    document.querySelector('.input').value += element.id.slice(4,5);
+
+                }
             }
         })
     }
 
-    function getAnswerExample(){
+    function getAnswerExample(value){
         let answer;
-        let example = document.querySelector('.input').value;
+        let example = value;
         let nums = example;
         nums = nums.replace('-', '+').replace('*', '+').replace('/', '+').replace('%', '+');
         nums = nums.split('+');
         let actions = example;
-        actions = actions.replace(/[0-9]/g,'');
+        actions = actions.replace(/[0-9]/g,'').replace('.', '');
         actions = actions.split('');
         
-        answer = +nums[0];
+        answer = parseFloat(nums[0]);
 
         console.log(actions,answer, nums)
 
         for (let i = 0; i < actions.length; i++){
             if (actions[i] == '+'){
-                answer += +nums[i+1];
+                answer += parseFloat(nums[i+1]);
             }
             if (actions[i] == '-'){
-                answer -= +nums[i+1];
+                answer -= parseFloat(nums[i+1]);
             }
             if (actions[i] == '*'){
-                answer *= +nums[i+1];
+                answer *= parseFloat(nums[i+1]);
             }
             if (actions[i] == '/'){
-                answer /= +nums[i+1];
+                answer /= parseFloat(nums[i+1]);
             }
             if (actions[i] == '%'){
-                answer %= +nums[i+1];
+                answer %= parseFloat(nums[i+1]);
             }
         }
         return answer;
@@ -135,7 +140,7 @@
         buttonAC.classList.add('calculator__interface-item');
 
         buttonAC.addEventListener('click', function(){
-            document.querySelector('.input').value = '';
+            document.querySelector('.input').value = '0';
         });
 
         interfaceElements.push(buttonAC);
@@ -144,7 +149,7 @@
         equalityButton.classList.add('calculator__interface-item');
 
         equalityButton.addEventListener('click', function(){
-            document.querySelector('.input').value = getAnswerExample();
+            document.querySelector('.input').value = getAnswerExample(document.querySelector('.input').value);
         });
 
         interfaceElements.push(equalityButton);
@@ -177,16 +182,47 @@
         input.classList.add('calculator__interface-item');
         input.classList.add('input')
         input.id = 'input';
-        // input.value = '0';
+        input.value = '0';
 
-        // input.addEventListener('input' , function(event){
-        //     console.log(1)
-        //     if (!(+input.value[input.value.length-2])){
-        //         if (!(+event.target.value)){
-        //             input.value.splice(input.value.length-1, 1);
-        //         }
-        //     }
-        // })
+        input.addEventListener('input' , function(event){
+            if (input.value[0] == '0'){
+                console.log(1)
+                if (!(+input.value[1])){
+                    input.value = '0';
+                    return;
+                }
+                input.value = input.value.slice(1);
+                return;
+            }
+            if (input.value[input.value.length-1] == '='){
+                input.value = getAnswerExample(input.value.slice(0,input.value.length - 1))
+            }
+
+            input.value = input.value.replace(/[a-zA-Z\s]/g,"")
+            if (!(+input.value[input.value.length-2]) && +input.value[input.value.length-2] != 0){
+                if (!(+input.value[input.value.length-1]) && +input.value[input.value.length-2] != 0){
+                    input.value = input.value.slice(0,input.value.length - 1)
+                }
+            }
+        })
+
+        input.addEventListener('keydown', function(e){
+            if (e.keyCode == 13){
+                input.value = getAnswerExample(input.value);
+            }
+            if (e.keyCode == 8){
+                if (input.value.length != 1){
+                    input.value = input.value.slice(0,input.value.length)
+
+
+                }else{
+                    e.preventDefault();
+                    input.value = '0';
+                }
+
+
+            }
+        })
 
         calculator.append(input)
 
